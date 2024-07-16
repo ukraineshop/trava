@@ -279,52 +279,48 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 							</ol>
 						</div>
 
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('order_form').addEventListener('submit', function(e) {
+                e.preventDefault(); // Запобігаємо стандартній відправці форми
 
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                document.getElementById('order_form').addEventListener('submit', function(e) {
-                                    e.preventDefault(); // Запобігаємо стандартній відправці форми
-                                 
-                                    // Отримуємо значення полів форми
-                                    var name = document.querySelector('input[name="name"]').value;
-                                    var phone = document.querySelector('input[name="phone"]').value;
-                                    var count = document.querySelector('select[name="count"]').value; // Друге поле з ім'ям "name"
-                                    
-                                    
-                                 
-                                    // Формуємо повідомлення
-                                    var message = `Нове замовлення: \nІм'я та прізвище: ${name} \nТелефон: ${phone} \n Розмір: ${count};`
-                                    
-                                 
-                                    // Ваш токен та ID чату
-                                    var token = '7204057373:AAHkA5T_TV8UeuNHSCDE8MOiDdW0SSrqFwA';
-                                    var chatId = 2025391581; // Замініть YOUR_CHAT_ID на ваш реальний ID чату
-                                 
-                                    // Відправляємо повідомлення через Telegram API
-                                    fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: JSON.stringify({
-                                            chat_id: chatId,
-                                            text: message,
-                                            parse_mode: "Markdown"
-                                        })
-                                    })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        console.log('Success:', data);
-                                        // Після успішної відправки, одразу перенаправляємо на сторінку "Дякую"
-                                        window.location.href = "./трава_files/thank_you_page.html"; 
-                                    })
-                                    .catch((error) => {
-                                        console.error('Error:', error);
-                                        alert('Помилка при відправленні замовлення.');
-                                    });
-                                });
-                            });
-                        </script>
+                // Отримуємо значення полів форми
+                var name = document.querySelector('input[name="name"]').value;
+                var phone = document.querySelector('input[name="phone"]').value;
+                var count = document.querySelector('select[name="count"]').value;
+
+                // Формуємо повідомлення
+                var message = `Нове замовлення:\nІм'я та прізвище: ${name}\nТелефон: ${phone}\nРозмір: ${count}`;
+
+                // Ваш токен та ID чату
+                var token = '7204057373:AAHkA5T_TV8UeuNHSCDE8MOiDdW0SSrqFwA';
+                var chatId = 2025391581; // Замініть на ваш реальний ID чату
+
+                // Відправляємо повідомлення через Telegram API
+                fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: "Markdown"
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    // Після успішної відправки, одразу перенаправляємо на сторінку "Дякую"
+                    window.location.href = "./трава_files/thank_you_page.html"; 
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Помилка при відправленні замовлення.');
+                });
+            });
+        });
+    </script>
 
 
 
